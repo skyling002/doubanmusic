@@ -3,10 +3,41 @@
 # See documentation in:
 # https://docs.scrapy.org/en/latest/topics/spider-middleware.html
 
+import random
+
 from scrapy import signals
 
 # useful for handling different item types with a single interface
 from itemadapter import is_item, ItemAdapter
+
+# TODO 设置代理IP
+class ProxyMiddleware:
+    def __int__(self, proxy_list):
+        self.proxy_list = proxy_list
+
+    def from_crawler(cls, crawler):
+        return cls(
+            proxy_list = crawler.settings.get('PROXY_LIST')
+        )
+
+    def process_request(self, request, spider):
+        proxy = random.choice(self.proxy_list)
+        request.meta['proxy'] = proxy
+# TODO 设置User-Agent
+class UserAgentMiddleware:
+    def __init__(self, user_agent_list):
+        self.user_agent_list = user_agent_list
+
+    @classmethod
+    def from_crawler(cls, crawler):
+        return cls(
+            user_agent_list = crawler.settings.get('USER_AGENT_LIST')
+        )
+
+    def process_request(self, request, spider):
+        user_agent = random.choice(self.user_agent_list)
+        request.headers['User-Agent'] = user_agent
+
 
 
 class DoubanmusicSpiderMiddleware:

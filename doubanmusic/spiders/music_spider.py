@@ -11,12 +11,13 @@ class MusicSpiderSpider(scrapy.Spider):
     name = "music_spider"
     allowed_domains = ["music.douban.com"]
     start_urls = ["https://music.douban.com/tag/"]
-    tag_base_url = "https://music.douban.com/tag/"
+    douban_url = "https://music.douban.com"
     album_base_url = "https://music.douban.com/subject/"
     offset = 20 # 分页参数
     tag_urls = []
     album_urls = []
-    k = 1
+    MAX_PAGES = 50
+    ITEM_PER_PAGE = 20
 
     def parse(self, response):
         """处理分类列表页，提取所有分类URL"""
@@ -25,9 +26,10 @@ class MusicSpiderSpider(scrapy.Spider):
             tag = td.xpath('./a/text()').get()
             tag_url = self.tag_base_url + tag
             self.tag_urls.append(tag_url)
-        test_url = self.tag_urls[0]
-        yield response.follow(test_url, self.parse_category)
-            # yield response.follow(tag_url, self.parse_category)
+
+        for tag_url in self.tag_urls:
+            self.logger.info(f"正在爬取分类: {tag_url}")
+            yield response.follow(tag_url, self.parse_category)
 
     def parse_category(self, response):
         """处理单个分类页的分页逻辑"""
@@ -35,24 +37,37 @@ class MusicSpiderSpider(scrapy.Spider):
         subject_list = response.xpath('//*[@id="subject_list"]/table/tr[@class="item"]')
         for subject in subject_list:
             album_id = subject.xpath('./@id').get()
+            has_rating = subject.xpath('.//div[contains(@class,"star") and contains(@class,"clearfix")]')
+            if not has_rating:
+                self.logger.debug(f"跳过无评分专辑: {album_id}")
+                continue
             album_url = self.album_base_url + album_id
             self.album_urls.append(album_url)
-            # yield response.follow(album_url, self.parse_album)
-        test_url = self.album_urls[1]
-        yield response.follow(test_url, self.parse_album)
-        # yield from self.parse_album_list(response)
-        #
-        # # 处理分页（示例最多爬取10页）
-        # next_page = response.css('a.next-page::attr(href)').get()
-        # if next_page and int(next_page.split('=')[-1]) <= 10:
-        #     yield response.follow(next_page, self.parse_category)
+            yield response.follow(album_url, self.parse_album)
 
+        # # 处理分页（示例最多爬取50页）
+        next_page = response.xpath('//span[@class="next"]/a/@href').get()
+        if next_page:
+            try:
+                match = re.search(r'start=(\d+)', next_page)
+                if match:
+                    start_value = match.group(1)
+                    pages = int(start_value) / self.ITEM_PER_PAGE
+                    if pages < 50:
+                        next_url = self.douban_url + next_page
+                        yield response.follow(next_url, self.parse_category())
+                else:
+                    # 处理不符合预期格式的情况
+                    self.logger.warning("Next page URL does not match expected format: %s", next_page)
+            except(ValueError, AttributeError) as e:
+                # 捕获并记录异常
+                self.logger.error("Error processing next page URL: %s", e)
     def parse_album(self, response):
         """处理专辑详情页"""
-        print("*" * 50)
-        print(response.text)
-        with open("doubanmusic/resource/output/a.html", 'w', encoding='utf-8') as f:
-            f.write(response.text)
+        # print("*" * 50)
+        # print(response.text)
+        # with open("doubanmusic/resource/output/a.html", 'w', encoding='utf-8') as f:
+        #     f.write(response.text)
 
         item = AlbumItem()
         item['album_url'] = response.url

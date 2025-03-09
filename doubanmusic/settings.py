@@ -13,23 +13,37 @@ SPIDER_MODULES = ["doubanmusic.spiders"]
 NEWSPIDER_MODULE = "doubanmusic.spiders"
 
 
+
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.97 Safari/537.36"
+
+# TODO UA列表和代理IP列表
+USER_AGENTS = [
+       'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36...',
+       'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7)...',
+       # 准备 50+ 真实浏览器 UA
+   ]
+
+PROXY_LIST = [
+    "",
+]
 
 # Obey robots.txt rules
 ROBOTSTXT_OBEY = False # 不遵循robots协议
 
 
 # Configure maximum concurrent requests performed by Scrapy (default: 16)
-#CONCURRENT_REQUESTS = 32
+CONCURRENT_REQUESTS = 8 # 全局并发数
 
 # Configure a delay for requests for the same website (default: 0)
 # See https://docs.scrapy.org/en/latest/topics/settings.html#download-delay
 # See also autothrottle settings and docs
-#DOWNLOAD_DELAY = 3
+DOWNLOAD_DELAY = 3  # 基础延迟
+RANDOMIZE_DOWNLOAD_DELAY = True  # 添加±0.5秒随机波动
+
 # The download delay setting will honor only one of:
-#CONCURRENT_REQUESTS_PER_DOMAIN = 16
-#CONCURRENT_REQUESTS_PER_IP = 16
+CONCURRENT_REQUESTS_PER_DOMAIN = 2
+CONCURRENT_REQUESTS_PER_IP = 2
 
 # Disable cookies (enabled by default)
 COOKIES_ENABLED = False # 不需要模拟登录
@@ -70,11 +84,11 @@ ITEM_PIPELINES = {
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See https://docs.scrapy.org/en/latest/topics/autothrottle.html
-#AUTOTHROTTLE_ENABLED = True
+AUTOTHROTTLE_ENABLED = True
 # The initial download delay
-#AUTOTHROTTLE_START_DELAY = 5
+AUTOTHROTTLE_START_DELAY = 5  # 初始延迟
 # The maximum download delay to be set in case of high latencies
-#AUTOTHROTTLE_MAX_DELAY = 60
+AUTOTHROTTLE_MAX_DELAY = 15   # 最大延迟（服务器响应慢时自动延长）
 # The average number of requests Scrapy should be sending in parallel to
 # each remote server
 #AUTOTHROTTLE_TARGET_CONCURRENCY = 1.0
