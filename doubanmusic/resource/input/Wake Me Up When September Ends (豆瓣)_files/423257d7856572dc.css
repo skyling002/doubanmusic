@@ -1,0 +1,75 @@
+
+    .infobox {
+        width: 100%;
+        _width: 120px;
+        margin-top: 5px;
+    }
+
+    .infobox .bd {
+        background: #66BA9C;
+        border: none;
+        cursor: pointer;
+        padding: 4px 0;
+        margin-right: 3px;
+        _margin-right: 0px;
+        -webkit-border-radius: 2px;
+        -moz-border-radius: 2px;
+        border-radius: 2px;
+    }
+
+    .infobox .bd:hover {
+        opacity: .8;
+    }
+
+    .infobox .bd a {
+        color: #FCF9FD;
+    }
+    .infobox .bd a:hover {
+        background: none;
+    }
+
+    #mainpic .infobox .bd a img {
+        margin-bottom: 2px;
+    }
+
+                    .doulist-add-btn { margin:0; }
+                    
+                    .track-items {
+                        list-style: none;
+                    }
+                    .track-items li {
+                        position: relative;
+                        padding-left: 33px;
+                    }
+                    .track-items li::before {
+                        content: attr(data-track-order);
+                        width: 30px;
+                        text-align: right;
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                    }
+                    .indent {
+                        word-wrap: break-word;
+                        word-break: normal;
+                    }
+                
+    .music-tags:link, .music-tags:visited, .music-tags:focus, .music-tags:active {
+        background-color: #f5f5f5;
+        color: #37a;
+    }
+    .music-tags:hover {
+        background-color: #f0f3ef;
+    }
+    #db-tags-section .tags-body {
+        line-height: 24px;
+    }
+    #db-tags-section a{
+        display: inline-block;
+        *display: inline;
+        *zoom: 1;
+        letter-spacing: normal;
+        margin: 0px 8px 8px 0px;
+        padding: 0px 8px;
+        border-radius: 2px;
+    }

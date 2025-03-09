@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="ua-windows ua-webkit">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="renderer" content="webkit">
+    <meta name="referrer" content="always">
+    <meta name="google-site-verification" content="ok0wCgT20tBBgo9_zat2iAcimtN4Ftf5ccsh092Xeyw" />
+    <title>豆瓣音乐标签</title>
+    
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="Sun, 6 Mar 2005 01:00:00 GMT">
+    
+    <script >var _head_start = new Date();</script>
+    <script src="https://img1.doubanio.com/f/vendors/0511abe9863c2ea7084efa7e24d1d86c5b3974f1/js/jquery-1.10.2.min.js"></script>
+    <script src="https://img1.doubanio.com/f/vendors/bdcc3c1ecb6de06ac99661953f4731c39e72af7f/js/douban.js"></script>
+    <script src="https://img1.doubanio.com/f/vendors/43c21c5607ffe86759538789a60360c06532b4bf/js/do.js" data-cfg-autoload="false"></script>
+    <link href="https://img1.doubanio.com/f/vendors/e92483e5e4c9c60cc75cbd8b700a2fd5b5fdf7b0/css/douban.css" rel="stylesheet" type="text/css">
+    <link href="https://img3.doubanio.com/cuphead/music-static/css/init.3670a.css" rel="stylesheet" type="text/css" />
+    <style type="text/css">
+        
+.tagCol{ width: 100% }
+.tagCol td { width: 20%; font-size:14px }
+.tagCol td b { font-weight: normal; color: #aaa }
+.mod { margin-bottom: 30px }
+.tag_cloud {overflow: hidden;}
+.tag_cloud .cloud1,
+.tag_cloud .cloud2,
+.tag_cloud .cloud3,
+.tag_cloud .cloud4 {
+    float: left;
+    width: 19%;
+}
+
+    </style>
+    
+    <!-- COLLECTED CSS -->
+    <script></script>
+
+    <link rel="shortcut icon" href="https://img1.doubanio.com/favicon.ico" type="image/x-icon">
+</head>
+
+<body>
+  
+    <script type="text/javascript">var _body_start = new Date();</script>
+    
+   
+
+
+
+    <link href="//img3.doubanio.com/dae/accounts/resources/851ead1/shire/bundle.css" rel="stylesheet" type="text/css">
+
+
+
+<div id="db-global-nav" class="global-nav">
+  <div class="bd">
+    
+<div class="top-nav-info">
+  <a href="https://accounts.douban.com/passport/login?source=music" class="nav-login" rel="nofollow">登录/注册</a>
+</div>
+
+
+    <div class="top-nav-doubanapp">
+  <a href="https://www.douban.com/doubanapp/app?channel=top-nav" class="lnk-doubanapp">下载豆瓣客户端</a>
+  <div id="doubanapp-tip">
+    <a href="https://www.douban.com/doubanapp/app?channel=qipao" class="tip-link">豆瓣 <span class="version">6.0</span> 全新发布</a>
+    <a href="javascript: void 0;" class="tip-close">×</a>
+  </div>
+  <div id="top-nav-appintro" class="more-items">
+    <p class="appintro-title">豆瓣</p>
+    <p class="qrcode">扫码直接下载</p>
+    <div class="download">
+      <a href="https://www.douban.com/doubanapp/redirect?channel=top-nav&direct_dl=1&download=iOS">iPhone</a>
+      <span>·</span>
+      <a href="https://www.douban.com/doubanapp/redirect?channel=top-nav&direct_dl=1&download=Android" class="download-android">Android</a>
+    </div>
+  </div>
+</div>
+
+    
+
+
+<div class="global-nav-items">
+  <ul>
+    <li class="">
+      <a href="https://www.douban.com" target="_blank" data-moreurl-dict="{&quot;from&quot;:&quot;top-nav-click-main&quot;,&quot;uid&quot;:&quot;0&quot;}">豆瓣</a>
+    </li>
+    <li class="">
+      <a href="https://book.douban.com" target="_blank" data-moreurl-dict="{&quot;from&quot;:&quot;top-nav-click-book&quot;,&quot;uid&quot;:&quot;0&quot;}">读书</a>
+    </li>
+    <li class="">
+      <a href="https://movie.douban.com" target="_blank" data-moreurl-dict="{&quot;from&quot;:&quot;top-nav-click-movie&quot;,&quot;uid&quot;:&quot;0&quot;}">电影</a>
+    </li>
+    <li class="on">
+      <a href="https://music.douban.com"  data-moreurl-dict="{&quot;from&quot;:&quot;top-nav-click-music&quot;,&quot;uid&quot;:&quot;0&quot;}">音乐</a>
+    </li>
+    <li class="">
+      <a href="https://www.douban.com/location" target="_blank" data-moreurl-dict="{&quot;from&quot;:&quot;top-nav-click-location&quot;,&quot;uid&quot;:&quot;0&quot;}">同城</a>
+    </li>
+    <li class="">
+      <a href="https://www.douban.com/group" target="_blank" data-moreurl-dict="{&quot;from&quot;:&quot;top-nav-click-group&quot;,&quot;uid&quot;:&quot;0&quot;}">小组</a>
+    </li>
+    <li class="">
+      <a href="https://read.douban.com&#47;?dcs=top-nav&amp;dcm=douban" target="_blank" data-moreurl-dict="{&quot;from&quot;:&quot;top-nav-click-read&quot;,&quot;uid&quot;:&quot;0&quot;}">阅读</a>
+    </li>
+    <li class="">
+      <a href="https://fm.douban.com&#47;?from_=shire_top_nav" target="_blank" data-moreurl-dict="{&quot;from&quot;:&quot;top-nav-click-fm&quot;,&quot;uid&quot;:&quot;0&quot;}">FM</a>
+    </li>
+    <li class="">
+      <a href="https://time.douban.com&#47;?dt_time_source=douban-web_top_nav" target="_blank" data-moreurl-dict="{&quot;from&quot;:&quot;top-nav-click-time&quot;,&quot;uid&quot;:&quot;0&quot;}">时间</a>
+    </li>
+    <li class="">
+      <a href="https://market.douban.com&#47;?utm_campaign=douban_top_nav&amp;utm_source=douban&amp;utm_medium=pc_web" target="_blank" data-moreurl-dict="{&quot;from&quot;:&quot;top-nav-click-market&quot;,&quot;uid&quot;:&quot;0&quot;}">豆品</a>
+    </li>
+  </ul>
+</div>
+
+  </div>
+</div>
+<script>
+  ;window._GLOBAL_NAV = {
+    DOUBAN_URL: "https://www.douban.com",
+    N_NEW_NOTIS: 0,
+    N_NEW_DOUMAIL: 0
+  };
+</script>
+
+
+
+    <script src="//img3.doubanio.com/dae/accounts/resources/851ead1/shire/bundle.js" defer="defer"></script>
+
+
+
+
+      
+
+
+
+    <link href="//img3.doubanio.com/dae/accounts/resources/851ead1/music/bundle.css" rel="stylesheet" type="text/css">
+
+
+
+
+<div id="db-nav-music" class="nav">
+  <div class="nav-wrap">
+  <div class="nav-primary">
+    <div class="nav-logo">
+      <a href="https:&#47;&#47;music.douban.com">豆瓣音乐</a>
+    </div>
+    <div class="nav-search">
+      <form action="https:&#47;&#47;search.douban.com&#47;music/subject_search" method="get">
+        <fieldset>
+          <legend>搜索：</legend>
+          <label for="inp-query">
+          </label>
+          <div class="inp"><input id="inp-query" name="search_text" size="22" maxlength="60" placeholder="唱片名、表演者、条码、ISRC" value=""></div>
+          <div class="inp-btn"><input type="submit" value="搜索"></div>
+          <input type="hidden" name="cat" value="1003" />
+        </fieldset>
+      </form>
+    </div>
+  </div>
+  </div>
+  <div class="nav-secondary">
+    
+
+<div class="nav-items">
+  <ul>
+    <li    ><a href="https://music.douban.com/artists/"
+     >音乐人</a>
+    </li>
+    <li    ><a href="https://music.douban.com/topics/"
+     >专题</a>
+    </li>
+    <li    ><a href="https://music.douban.com/chart"
+     >排行榜</a>
+    </li>
+    <li    ><a href="https://music.douban.com/tag/"
+     >分类浏览</a>
+    </li>
+    <li    ><a href="https://music.douban.com/review/latest/"
+     >乐评</a>
+    </li>
+    <li    ><a href="https://fm.douban.com/?from_=music_nav"
+     >豆瓣FM</a>
+    </li>
+    <li    ><a href="https://fm.douban.com/explore/songlists/"
+     >歌单</a>
+    </li>
+    <li    ><a href="https://music.douban.com/annual/2024/?fullscreen=1&source=navigation"
+            target="_blank"
+     >2024年度榜单</a>
+    </li>
+  </ul>
+</div>
+
+    <a href="https://music.douban.com/annual/2024/?source=music_navigation" class="musicannual"></a>
+  </div>
+</div>
+
+<script id="suggResult" type="text/x-jquery-tmpl">
+  <li data-link="{{= url}}">
+            <a href="{{= url}}" onclick="moreurl(this, {from:'music_search_sugg', query:'{{= keyword }}', subject_id:'{{= id}}', i: '{{= index}}', type: '{{= type}}'})">
+            <img src="{{= pic}}" width="40" />
+            <div>
+                <em>{{= title}}</em>
+                {{if type == "m"}}
+                    <span>(艺术家)</span>
+                {{else type == "a"}}
+                    <span>(音乐人)</span>
+                {{else type == "d"}}
+                    <span>(DJ)</span>
+                {{else type == "l"}}
+                    <span>(厂牌)</span>
+                {{/if}}
+                {{if other_title}}
+                    <span>其他名称：{{= other_title}}</span>
+                {{/if}}
+                {{if performer}}
+                    <p>表演者：{{= performer}}</p>
+                {{/if}}
+                {{if cn_name}}
+                    <p>{{= cn_name}}</p>
+                {{/if}}
+                {{if en_name}}
+                    <p>{{= en_name}}</p>
+                {{/if}}
+            </div>
+        </a>
+        </li>
+  </script>
+
+
+
+
+    <script src="//img3.doubanio.com/dae/accounts/resources/851ead1/music/bundle.js" defer="defer"></script>
+
+
+
+
+
+    <div id="wrapper">
+        
+
+        
+<div id="content">
+    
+    <h1>豆瓣音乐标签</h1>
+
+    <div class="grid-16-8 clearfix">
+        
+        
+        <div class="article">
+               
+    
+
+        
+
+        <div id="风格" class="mod">
+            <div class="hd">
+                <h2>风格&nbsp;&middot;&nbsp;&middot;&nbsp;&middot;&nbsp;&middot;&nbsp;&middot;&nbsp;&middot;</h2>
+            </div>
+            <div class="bd">
+                <table class="tagCol">
+                    <tbody>
+                        
+                                <tr>
+                            <td><a href="/tag/OST">OST</a><b>(1597402)</b></td>
+                            <td><a href="/tag/流行">流行</a><b>(1082606)</b></td>
+                            <td><a href="/tag/民谣">民谣</a><b>(883125)</b></td>
+                            <td><a href="/tag/pop">pop</a><b>(834686)</b></td>
+                                </tr>
+                                <tr>
+                            <td><a href="/tag/indie">indie</a><b>(783044)</b></td>
+                            <td><a href="/tag/Electronic">Electronic</a><b>(759442)</b></td>
+                            <td><a href="/tag/Folk">Folk</a><b>(676125)</b></td>
+                            <td><a href="/tag/摇滚">摇滚</a><b>(627807)</b></td>
+                                </tr>
+                                <tr>
+                            <td><a href="/tag/J-POP">J-POP</a><b>(514305)</b></td>
+                            <td><a href="/tag/电影原声">电影原声</a><b>(471674)</b></td>
+                            <td><a href="/tag/rock">rock</a><b>(449821)</b></td>
+                            <td><a href="/tag/R&amp;B">R&amp;B</a><b>(437828)</b></td>
+                                </tr>
+                                <tr>
+                            <td><a href="/tag/JPOP">JPOP</a><b>(376363)</b></td>
+                            <td><a href="/tag/post-rock">post-rock</a><b>(292079)</b></td>
+                            <td><a href="/tag/jazz">jazz</a><b>(288766)</b></td>
+                            <td><a href="/tag/独立音乐">独立音乐</a><b>(257629)</b></td>
+                                </tr>
+                                <tr>
+                            <td><a href="/tag/电子">电子</a><b>(235909)</b></td>
+                            <td><a href="/tag/中国摇滚">中国摇滚</a><b>(218448)</b></td>
+                            <td><a href="/tag/纯音乐">纯音乐</a><b>(217179)</b></td>
+                            <td><a href="/tag/经典">经典</a><b>(215563)</b></td>
+                                </tr>
+                                <tr>
+                            <td><a href="/tag/古典">古典</a><b>(211234)</b></td>
+                            <td><a href="/tag/Metal">Metal</a><b>(183207)</b></td>
+                            <td><a href="/tag/Soundtrack">Soundtrack</a><b>(183044)</b></td>
+                            <td><a href="/tag/Alternative">Alternative</a><b>(180548)</b></td>
+                                </tr>
+                                <tr>
+                            <td><a href="/tag/Brit-pop">Brit-pop</a><b>(179963)</b></td>
+                            <td><a href="/tag/britpop">britpop</a><b>(166316)</b></td>
+                            <td><a href="/tag/原声">原声</a><b>(156369)</b></td>
+                            <td><a href="/tag/独立">独立</a><b>(151021)</b></td>
+                                </tr>
+                                <tr>
+                            <td><a href="/tag/punk">punk</a><b>(137995)</b></td>
+                            <td><a href="/tag/钢琴">钢琴</a><b>(133661)</b></td>
+                            <td><a href="/tag/Soul">Soul</a><b>(131853)</b></td>
+                            <td><a href="/tag/Post-Punk">Post-Punk</a><b>(128807)</b></td>
+                                </tr>
+                                <tr>
+                            <td><a href="/tag/classical">classical</a><b>(128641)</b></td>
+                            <td><a href="/tag/hip-hop">hip-hop</a><b>(116664)</b></td>
+                            <td><a href="/tag/后摇">后摇</a><b>(112715)</b></td>
+                            <td><a href="/tag/Indie-Pop">Indie-Pop</a><b>(112511)</b></td>
+                                </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        
+
+        <div id="地区/语言" class="mod">
+            <div class="hd">
+                <h2>地区/语言&nbsp;&middot;&nbsp;&middot;&nbsp;&middot;&nbsp;&middot;&nbsp;&middot;&nbsp;&middot;</h2>
+            </div>
+            <div class="bd">
+                <table class="tagCol">
+                    <tbody>
+                        
+                                <tr>
+                            <td><a href="/tag/日本">日本</a><b>(1670564)</b></td>
+                            <td><a href="/tag/台湾">台湾</a><b>(1477088)</b></td>
+                            <td><a href="/tag/华语">华语</a><b>(1118944)</b></td>
+                            <td><a href="/tag/欧美">欧美</a><b>(1069194)</b></td>
+                                </tr>
+                                <tr>
+                            <td><a href="/tag/美国">美国</a><b>(1053420)</b></td>
+                            <td><a href="/tag/内地">内地</a><b>(653642)</b></td>
+                            <td><a href="/tag/英国">英国</a><b>(626390)</b></td>
+                            <td><a href="/tag/香港">香港</a><b>(554042)</b></td>
+                                </tr>
+                                <tr>
+                            <td><a href="/tag/韩国">韩国</a><b>(390948)</b></td>
+                            <td><a href="/tag/UK">UK</a><b>(297117)</b></td>
+                            <td><a href="/tag/粤语">粤语</a><b>(271746)</b></td>
+                            <td><a href="/tag/大陆">大陆</a><b>(195138)</b></td>
+                                </tr>
+                                <tr>
+                            <td><a href="/tag/US">US</a><b>(164109)</b></td>
+                            <td><a href="/tag/法国">法国</a><b>(156766)</b></td>
+                            <td><a href="/tag/华语音乐">华语音乐</a><b>(154324)</b></td>
+                            <td><a href="/tag/港台">港台</a><b>(151194)</b></td>
+                                </tr>
+                                <tr>
+                            <td><a href="/tag/德国">德国</a><b>(142501)</b></td>
+                            <td><a href="/tag/英伦">英伦</a><b>(138462)</b></td>
+                            <td><a href="/tag/国语">国语</a><b>(109371)</b></td>
+                            <td><a href="/tag/瑞典">瑞典</a><b>(107778)</b></td>
+                                </tr>
+                                <tr>
+                            <td><a href="/tag/爱尔兰">爱尔兰</a><b>(106995)</b></td>
+                            <td><a href="/tag/英文">英文</a><b>(73425)</b></td>
+                            <td><a href="/tag/新加坡">新加坡</a><b>(71668)</b></td>
+                            <td><a href="/tag/Japan">Japan</a><b>(68692)</b></td>
+                                </tr>
+                                <tr>
+                            <td><a href="/tag/HK">HK</a><b>(65504)</b></td>
+                            <td><a href="/tag/台灣">台灣</a><b>(56154)</b></td>
+                            <td><a href="/tag/冰岛">冰岛</a><b>(55078)</b></td>
+                            <td><a href="/tag/挪威">挪威</a><b>(51727)</b></td>
+                                </tr>
+                                <tr>
+                            <td><a href="/tag/日本音乐">日本音乐</a><b>(44322)</b></td>
+                            <td><a href="/tag/意大利">意大利</a><b>(42488)</b></td>
+                            <td><a href="/tag/马来西亚">马来西亚</a><b>(35301)</b></td>
+                            <td><a href="/tag/俄罗斯">俄罗斯</a><b>(35133)</b></td>
+                                </tr>
+                                <tr>
+                            <td><a href="/tag/西班牙">西班牙</a><b>(33138)</b></td>
+                            <td><a href="/tag/欧美音乐">欧美音乐</a><b>(30666)</b></td>
+                            <td><a href="/tag/法语">法语</a><b>(27358)</b></td>
+                            <td><a href="/tag/北欧">北欧</a><b>(23199)</b></td>
+                                </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        
+
+        <div id="艺术家" class="mod">
+            <div class="hd">
+                <h2>艺术家&nbsp;&middot;&nbsp;&middot;&nbsp;&middot;&nbsp;&middot;&nbsp;&middot;&nbsp;&middot;</h2>
+            </div>
+            <div class="bd">
+                <table class="tagCol">
+                    <tbody>
+                        
+                                <tr>
+                            <td><a href="/tag/周杰伦">周杰伦</a><b>(296128)</b></td>
+                            <td><a href="/tag/王菲">王菲</a><b>(203232)</b></td>
+                            <td><a href="/tag/陈奕迅">陈奕迅</a><b>(191370)</b></td>
+                            <td><a href="/tag/孙燕姿">孙燕姿</a><b>(184635)</b></td>
+                                </tr>
+                                <tr>
+                            <td><a href="/tag/五月天">五月天</a><b>(179294)</b></td>
+                            <td><a href="/tag/陈绮贞">陈绮贞</a><b>(169499)</b></td>
+                            <td><a href="/tag/苏打绿">苏打绿</a><b>(154369)</b></td>
+                            <td><a href="/tag/梁静茹">梁静茹</a><b>(116939)</b></td>
+                                </tr>
+                                <tr>
+                            <td><a href="/tag/Coldplay">Coldplay</a><b>(110676)</b></td>
+                            <td><a href="/tag/久石让">久石让</a><b>(94339)</b></td>
+                            <td><a href="/tag/张悬">张悬</a><b>(86425)</b></td>
+                            <td><a href="/tag/椎名林檎">椎名林檎</a><b>(71294)</b></td>
+                                </tr>
+                                <tr>
+                            <td><a href="/tag/Beethoven">Beethoven</a><b>(70263)</b></td>
+                            <td><a href="/tag/窦唯">窦唯</a><b>(69927)</b></td>
+                            <td><a href="/tag/蔡健雅">蔡健雅</a><b>(69894)</b></td>
+                            <td><a href="/tag/林俊杰">林俊杰</a><b>(68496)</b></td>
+                                </tr>
+                                <tr>
+                            <td><a href="/tag/莫文蔚">莫文蔚</a><b>(66996)</b></td>
+                            <td><a href="/tag/Bach">Bach</a><b>(64815)</b></td>
+                            <td><a href="/tag/Jay">Jay</a><b>(63057)</b></td>
+                            <td><a href="/tag/范晓萱">范晓萱</a><b>(61975)</b></td>
+                                </tr>
+                                <tr>
+                            <td><a href="/tag/蔡依林">蔡依林</a><b>(61378)</b></td>
+                            <td><a href="/tag/Radiohead">Radiohead</a><b>(60366)</b></td>
+                            <td><a href="/tag/王力宏">王力宏</a><b>(56660)</b></td>
+                            <td><a href="/tag/GreenDay">GreenDay</a><b>(55801)</b></td>
+                                </tr>
+                                <tr>
+                            <td><a href="/tag/S.H.E">S.H.E</a><b>(54869)</b></td>
+                            <td><a href="/tag/LinkinPark">LinkinPark</a><b>(54644)</b></td>
+                            <td><a href="/tag/朴树">朴树</a><b>(52640)</b></td>
+                            <td><a href="/tag/许巍">许巍</a><b>(50595)</b></td>
+                                </tr>
+                                <tr>
+                            <td><a href="/tag/MyLittleAirport">MyLittleAirport</a><b>(48337)</b></td>
+                            <td><a href="/tag/Oasis">Oasis</a><b>(48314)</b></td>
+                            <td><a href="/tag/张震岳">张震岳</a><b>(47733)</b></td>
+                            <td><a href="/tag/张国荣">张国荣</a><b>(47400)</b></td>
+                                </tr>
+                                <tr>
+                            <td><a href="/tag/陶喆">陶喆</a><b>(46518)</b></td>
+                            <td><a href="/tag/张惠妹">张惠妹</a><b>(45228)</b></td>
+                            <td><a href="/tag/萧亚轩">萧亚轩</a><b>(45078)</b></td>
+                            <td><a href="/tag/Eminem">Eminem</a><b>(43907)</b></td>
+                                </tr>
+                                <tr>
+                            <td><a href="/tag/曹方">曹方</a><b>(43513)</b></td>
+                            <td><a href="/tag/刘若英">刘若英</a><b>(42863)</b></td>
+                            <td><a href="/tag/张学友">张学友</a><b>(42537)</b></td>
+                            <td><a href="/tag/DamienRice">DamienRice</a><b>(42411)</b></td>
+                                </tr>
+                                <tr>
+                            <td><a href="/tag/蘇打綠">蘇打綠</a><b>(41605)</b></td>
+                            <td><a href="/tag/L&#39;Arc~en~Ciel">L&#39;Arc~en~Ciel</a><b>(41602)</b></td>
+                            <td><a href="/tag/戴佩妮">戴佩妮</a><b>(41360)</b></td>
+                            <td><a href="/tag/Nirvana">Nirvana</a><b>(41338)</b></td>
+                                </tr>
+                                <tr>
+                            <td><a href="/tag/陈珊妮">陈珊妮</a><b>(41252)</b></td>
+                            <td><a href="/tag/PinkFloyd">PinkFloyd</a><b>(41233)</b></td>
+                            <td><a href="/tag/KerenAnn">KerenAnn</a><b>(38896)</b></td>
+                            <td><a href="/tag/浜崎あゆみ">浜崎あゆみ</a><b>(38510)</b></td>
+                                </tr>
+                                <tr>
+                            <td><a href="/tag/JamesBlunt">JamesBlunt</a><b>(38118)</b></td>
+                            <td><a href="/tag/MariahCarey">MariahCarey</a><b>(37327)</b></td>
+                            <td><a href="/tag/avrillavigne">avrillavigne</a><b>(37005)</b></td>
+                            <td><a href="/tag/林海">林海</a><b>(36082)</b></td>
+                                </tr>
+                                <tr>
+                            <td><a href="/tag/Brahms">Brahms</a><b>(35295)</b></td>
+                            <td><a href="/tag/Chopin">Chopin</a><b>(34653)</b></td>
+                            <td><a href="/tag/范玮琪">范玮琪</a><b>(34333)</b></td>
+                            <td><a href="/tag/beatles">beatles</a><b>(33944)</b></td>
+                                </tr>
+                                <tr>
+                            <td><a href="/tag/林一峰">林一峰</a><b>(32775)</b></td>
+                            <td><a href="/tag/张靓颖">张靓颖</a><b>(32513)</b></td>
+                            <td><a href="/tag/宇多田光">宇多田光</a><b>(31165)</b></td>
+                            <td><a href="/tag/Schubert">Schubert</a><b>(30862)</b></td>
+                                </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    
+
+        </div>
+        <div class="aside">
+                
+
+<h2>标签直达　· · · · · ·　
+    </h2>
+    <form name="tsp_form" action="https://music.douban.com/tag/" method="GET"><input name="search_text" class="j a_search_text" type="text" size="24" maxlength="36" title="去其他标签" value=""/>
+    <input class="butt" type="submit" value="进入"/>
+    </form><br/><br/>
+
+<!-- douban ad begin -->
+<div id="dale_music_tags_top_right"></div>
+<!-- douban ad end -->
+
+        </div>
+        <div class="extra">
+            
+    <!-- douban ad begin -->
+    <div id="dale_music_tag_bottom_banner"></div>
+    <!-- douban ad end -->
+
+        </div>
+    </div>
+</div>
+
+        
+<div id="footer">
+    
+<span id="icp" class="fleft gray-link">
+    &copy; 2005－2025 douban.com, all rights reserved 北京豆网科技有限公司
+</span>
+
+<a href="https://www.douban.com/hnypt/variformcyst.py" style="display: none;"></a>
+
+<span class="fright">
+    <a href="https://www.douban.com/about">关于豆瓣</a>
+    · <a href="https://www.douban.com/jobs">在豆瓣工作</a>
+    · <a href="https://www.douban.com/about?topic=contactus">联系我们</a>
+    · <a href="https://www.douban.com/about/legal">法律声明</a>
+    
+    · <a href="https://help.douban.com/?app=music" target="_blank">帮助中心</a>
+    · <a href="https://fm.douban.com/app">手机音乐</a>
+</span>
+
+</div>
+
+    </div>
+    
+
+    <!-- COLLECTED JS -->
+    
+<!-- douban ad begin -->
+
+
+
+
+
+    
+<script type="text/javascript">
+    (function (global) {
+        var newNode = global.document.createElement('script'),
+            existingNode = global.document.getElementsByTagName('script')[0],
+            adSource = '//erebor.douban.com/',
+            userId = '',
+            browserId = '-4-Hs_uoA2w',
+            criteria = '3:/tag/',
+            preview = '',
+            debug = false,
+            adSlots = ['dale_music_tags_top_right', 'dale_music_tag_bottom_banner'];
+
+        global.DoubanAdRequest = {src: adSource, uid: userId, bid: browserId, crtr: criteria, prv: preview, debug: debug};
+        global.DoubanAdSlots = (global.DoubanAdSlots || []).concat(adSlots);
+
+        newNode.setAttribute('type', 'text/javascript');
+        newNode.setAttribute('src', '//img1.doubanio.com/NWQ3bnN2eS9mL2FkanMvYjFiN2ViZWM0ZDBiZjlkNTE1ZDdiODZiZDc0NzNhNjExYWU3ZDk3My9hZC5yZWxlYXNlLmpz?company_token=kX69T8w1wyOE-dale');
+        newNode.setAttribute('async', true);
+        existingNode.parentNode.insertBefore(newNode, existingNode);
+    })(this);
+</script>
+
+
+
+
+
+
+
+<!-- douban ad end -->
+
+    
+    
+
+
+
+
+
+
+
+
+
+<!-- Google Tag Manager -->
+<noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-5WP579" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-5WP579');</script>
+<!-- End Google Tag Manager -->
+
+
+<script type="text/javascript">
+var _paq = _paq || [];
+_paq.push(['trackPageView']);
+_paq.push(['enableLinkTracking']);
+(function() {
+    var p=(('https:' == document.location.protocol) ? 'https' : 'http'), u=p+'://fundin.douban.com/';
+    _paq.push(['setTrackerUrl', u+'piwik']);
+    _paq.push(['setSiteId', '100001']);
+    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+    g.type='text/javascript';
+    g.defer=true;
+    g.async=true;
+    g.src=p+'://img3.doubanio.com/dae/fundin/piwik.js';
+    s.parentNode.insertBefore(g,s);
+})();
+</script>
+
+<script type="text/javascript">
+var _gaq = _gaq || [];
+_gaq.push(['_setAccount', 'UA-7019765-1']);
+_gaq.push(['_setCampNameKey', 'dcn']);
+_gaq.push(['_setCampSourceKey', 'dcs']);
+_gaq.push(['_setCampMediumKey', 'dcm']);
+_gaq.push(['_setCampTermKey', 'dct']);
+_gaq.push(['_setCampContentKey', 'dcc']);
+_gaq.push(['_addOrganic', 'baidu', 'word']);
+_gaq.push(['_addOrganic', 'soso', 'w']);
+_gaq.push(['_addOrganic', '3721', 'name']);
+_gaq.push(['_addOrganic', 'youdao', 'q']);
+_gaq.push(['_addOrganic', 'so.360.cn', 'q']);
+_gaq.push(['_addOrganic', 'vnet', 'kw']);
+_gaq.push(['_addOrganic', 'sogou', 'query']);
+_gaq.push(['_addIgnoredOrganic', '豆瓣']);
+_gaq.push(['_addIgnoredOrganic', 'douban']);
+_gaq.push(['_addIgnoredOrganic', '豆瓣网']);
+_gaq.push(['_addIgnoredOrganic', 'www.douban.com']);
+_gaq.push(['_setDomainName', '.douban.com']);
+
+
+    _gaq.push(['_setCustomVar', 1, 'responsive_view_mode', 'desktop', 3]);
+
+_gaq.push(['_trackPageview']);
+_gaq.push(['_trackPageLoadTime']);
+
+window._ga_init = function() {
+    var ga = document.createElement('script');
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    ga.setAttribute('async', 'true');
+    document.documentElement.firstChild.appendChild(ga);
+};
+if (window.addEventListener) {
+    window.addEventListener('load', _ga_init, false);
+} else {
+    window.attachEvent('onload', _ga_init);
+}
+</script>
+
+
+
+
+
+    <!-- dae-web-music--default-6566dcf854-sf7zf-->
+
+  <script>_SPLITTEST=''</script>
+</body>
+
+</html>
+
+
+
