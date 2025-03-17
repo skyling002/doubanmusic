@@ -7,6 +7,11 @@
 #     https://docs.scrapy.org/en/latest/topics/downloader-middleware.html
 #     https://docs.scrapy.org/en/latest/topics/spider-middleware.html
 
+TUNNEL = 'i528.kdltps.com:15818'
+TUNNEL_USERNAME = 't14186799080081'
+TUNNEL_PASSWORD = 'w7xvgxeb'
+
+
 BOT_NAME = "doubanmusic"
 
 SPIDER_MODULES = ["doubanmusic.spiders"]
@@ -15,25 +20,28 @@ NEWSPIDER_MODULE = "doubanmusic.spiders"
 
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
-USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.97 Safari/537.36"
+# USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.97 Safari/537.36"
+#
+# # TODO UA列表和代理IP列表
+# USER_AGENTS = [
+#        'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36...',
+#        'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7)...',
+#        # 准备 50+ 真实浏览器 UA
+#    ]
 
-# TODO UA列表和代理IP列表
-USER_AGENTS = [
-       'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36...',
-       'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7)...',
-       # 准备 50+ 真实浏览器 UA
-   ]
+# PROXY_LIST = [
+#     "",
+# ]
 
-PROXY_LIST = [
-    "",
-]
+# 在settings.py中配置
+REDIRECT_MAX_TIMES = 5  # 限制重定向次数
 
 # Obey robots.txt rules
 ROBOTSTXT_OBEY = False # 不遵循robots协议
 
 
 # Configure maximum concurrent requests performed by Scrapy (default: 16)
-CONCURRENT_REQUESTS = 8 # 全局并发数
+CONCURRENT_REQUESTS = 5  # 全局并发数设置为代理隧道的最大并发数
 
 # Configure a delay for requests for the same website (default: 0)
 # See https://docs.scrapy.org/en/latest/topics/settings.html#download-delay
@@ -42,9 +50,19 @@ DOWNLOAD_DELAY = 3  # 基础延迟
 RANDOMIZE_DOWNLOAD_DELAY = True  # 添加±0.5秒随机波动
 
 # The download delay setting will honor only one of:
-CONCURRENT_REQUESTS_PER_DOMAIN = 2
-CONCURRENT_REQUESTS_PER_IP = 2
+# CONCURRENT_REQUESTS_PER_DOMAIN = 2  # 每个域名的并发请求数
+# CONCURRENT_REQUESTS_PER_IP = 2  # 每个 IP 的并发请求数
 
+# 启用自动限速扩展
+AUTOTHROTTLE_ENABLED = True
+# 初始下载延迟
+AUTOTHROTTLE_START_DELAY = 5
+# 最大下载延迟
+AUTOTHROTTLE_MAX_DELAY = 60
+# 目标平均响应时间
+AUTOTHROTTLE_TARGET_CONCURRENCY = 2.0
+# 显示自动限速统计信息
+AUTOTHROTTLE_DEBUG = False
 # Disable cookies (enabled by default)
 COOKIES_ENABLED = False # 不需要模拟登录
 
@@ -65,9 +83,11 @@ COOKIES_ENABLED = False # 不需要模拟登录
 
 # Enable or disable downloader middlewares
 # See https://docs.scrapy.org/en/latest/topics/downloader-middleware.html
-#DOWNLOADER_MIDDLEWARES = {
-#    "doubanmusic.middlewares.DoubanmusicDownloaderMiddleware": 543,
-#}
+DOWNLOADER_MIDDLEWARES = {
+    "doubanmusic.middlewares.ProxyMiddleware": 543,
+    "doubanmusic.middlewares.UserAgentMiddleware": 544,
+   # "doubanmusic.middlewares.DoubanmusicDownloaderMiddleware": 543,
+}
 
 # Enable or disable extensions
 # See https://docs.scrapy.org/en/latest/topics/extensions.html

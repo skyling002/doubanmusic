@@ -1,6 +1,9 @@
+import logging
 import re
+import time
 
 import scrapy
+from scrapy.exceptions import IgnoreRequest
 
 from doubanmusic.items import AlbumItem
 from doubanmusic.utils.entity import keywords
@@ -13,11 +16,59 @@ class MusicSpiderSpider(scrapy.Spider):
     start_urls = ["https://music.douban.com/tag/"]
     douban_url = "https://music.douban.com"
     album_base_url = "https://music.douban.com/subject/"
-    offset = 20 # 分页参数
+    tag_base_url = "https://music.douban.com/tag/"
     tag_urls = []
     album_urls = []
     MAX_PAGES = 50
     ITEM_PER_PAGE = 20
+    index = 0
+    skip = 0
+
+    # 配置日志
+    logging.basicConfig(
+        filename='scrapy.log',
+        format='%(levelname)s: %(message)s',
+        level=logging.INFO,
+        encodings='utf-8'
+    )
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        # 记录爬虫开始时间
+        self.start_time = time.time()
+
+    def closed(self, reason):
+        end_time = time.time()
+        # 计算爬虫运行时长
+        duration = end_time - self.start_time
+        logging.info(f"爬虫运行时长: {duration} 秒，结束原因: {reason}")
+        # 爬虫关闭时打印自定义日志
+        logging.info("爬虫关闭，正在保存数据...")
+        logging.info(f'一共跳过{self.skip}个专辑')
+        logging.info(f'共爬取{self.index}个专辑')
+
+
+    # def process_response(self, request, response, spider):
+    #     if response.status in [301, 302]:
+    #         # 获取原请求的 URL
+    #         original_url = request.url
+    #         # 获取当前重试次数，默认为 0
+    #         retry_times = request.meta.get('retry_times', 0)
+    #
+    #         if retry_times < 5:
+    #             # 重试次数加 1
+    #             new_retry_times = retry_times + 1
+    #             # 创建一个新的请求对象，使用原 URL
+    #             new_request = request.copy()
+    #             new_request.url = original_url
+    #             new_request.meta['retry_times'] = new_retry_times
+    #             self.logger.info(f"Redirect detected. Retrying {original_url} (Attempt {new_retry_times}/5)")
+    #             return new_request
+    #         else:
+    #             # 达到最大重试次数，忽略该请求
+    #             self.logger.warning(f"Max retries reached for {original_url}. Ignoring request.")
+    #             raise IgnoreRequest()
+    #     return response
 
     def parse(self, response):
         """处理分类列表页，提取所有分类URL"""
@@ -27,48 +78,62 @@ class MusicSpiderSpider(scrapy.Spider):
             tag_url = self.tag_base_url + tag
             self.tag_urls.append(tag_url)
 
-        for tag_url in self.tag_urls:
+        for index, tag_url in enumerate(self.tag_urls):
+            # if index == 0:
+            #     self.logger.info(f"跳过第一个分类: {tag_url}")
+            #     continue
             self.logger.info(f"正在爬取分类: {tag_url}")
             yield response.follow(tag_url, self.parse_category)
+        # test_url = self.tag_urls[0]
+        # self.logger.info(f"正在爬取分类: {test_url}")
+        # yield response.follow(test_url, self.parse_category)
 
     def parse_category(self, response):
         """处理单个分类页的分页逻辑"""
         # 先提取当前分类页的专辑URL
         subject_list = response.xpath('//*[@id="subject_list"]/table/tr[@class="item"]')
+        if subject_list == []:
+            self.logger.info(f"该分类已无专辑")
+            return
         for subject in subject_list:
             album_id = subject.xpath('./@id').get()
             has_rating = subject.xpath('.//div[contains(@class,"star") and contains(@class,"clearfix")]')
             if not has_rating:
                 self.logger.debug(f"跳过无评分专辑: {album_id}")
+                self.skip += 1
                 continue
             album_url = self.album_base_url + album_id
             self.album_urls.append(album_url)
+            self.logger.info(f"正在爬取专辑: {album_id}")
+            self.index += 1
             yield response.follow(album_url, self.parse_album)
 
         # # 处理分页（示例最多爬取50页）
         next_page = response.xpath('//span[@class="next"]/a/@href').get()
-        if next_page:
-            try:
-                match = re.search(r'start=(\d+)', next_page)
-                if match:
-                    start_value = match.group(1)
-                    pages = int(start_value) / self.ITEM_PER_PAGE
-                    if pages < 50:
-                        next_url = self.douban_url + next_page
-                        yield response.follow(next_url, self.parse_category())
-                else:
-                    # 处理不符合预期格式的情况
-                    self.logger.warning("Next page URL does not match expected format: %s", next_page)
-            except(ValueError, AttributeError) as e:
-                # 捕获并记录异常
-                self.logger.error("Error processing next page URL: %s", e)
-    def parse_album(self, response):
-        """处理专辑详情页"""
-        # print("*" * 50)
-        # print(response.text)
-        # with open("doubanmusic/resource/output/a.html", 'w', encoding='utf-8') as f:
-        #     f.write(response.text)
+        if not next_page:
+            logging.info("未找到下一页，即将返回爬取下一个分类")
 
+        next_url = self.douban_url + next_page
+        logging.info("下一页: %s", next_url)
+        yield response.follow(next_url, self.parse_category)
+
+        # if next_page:
+            # try:
+            #     match = re.search(r'start=(\d+)', next_page)
+            #     if match:
+            #         start_value = match.group(1)
+            #         pages = int(start_value) / self.ITEM_PER_PAGE
+            #         if pages <= 50:
+            #             next_url = self.douban_url + next_page
+            #             logging.info("下一页: %s", next_url)
+            #             yield response.follow(next_url, self.parse_category)
+            #     else:
+            #         # 处理不符合预期格式的情况
+            #         self.logger.warning("Next page URL does not match expected format: %s", next_page)
+            # except(ValueError, AttributeError) as e:
+            #     # 捕获并记录异常
+            #     self.logger.error("Error processing next page URL: %s", e)
+    def parse_album(self, response):
         item = AlbumItem()
         item['album_url'] = response.url
         item['album_name'] = response.xpath('//*[@id="wrapper"]/h1/span/text()').get().strip()
@@ -156,21 +221,6 @@ class MusicSpiderSpider(scrapy.Spider):
         item['short_reviews'] = short_reviews
         yield item
 
-    # 解析分类页面（test）
-    def parse_tag(self, response):
-        list_td = response.xpath('//*[@id="风格"]/div[2]//td')
-
-        for td in list_td:
-            tag = td.xpath('./a/text()').get()
-            self.tags.append(tag)
-            self.tags_url.append(self.tag_base_url + tag)
-        pass
-
-    # 保存分类页面（test）
-    def save_style_url(self):
-        with open("doubanmusic/resource/tags_url.txt", 'w', encoding='utf-8') as f:
-            for tag_url in self.tags_url:
-                f.write(tag_url + '\n')
 
 
 

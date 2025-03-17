@@ -6,36 +6,49 @@
 import random
 
 from scrapy import signals
+from .utils.entity import get_user_agent
 
 # useful for handling different item types with a single interface
 from itemadapter import is_item, ItemAdapter
 
 # TODO 设置代理IP
-class ProxyMiddleware:
-    def __int__(self, proxy_list):
-        self.proxy_list = proxy_list
+import logging
+import requests
 
-    def from_crawler(cls, crawler):
-        return cls(
-            proxy_list = crawler.settings.get('PROXY_LIST')
-        )
+# 配置日志记录
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+
+class ProxyMiddleware:
+    def __init__(self):
+        # 初始化隧道代理的用户名、密码和地址
+        self.tunnel_username = 't14186799080081'
+        self.tunnel_password = 'w7xvgxeb'
+        self.tunnel = 'i528.kdltps.com:15818'
+        # 生成代理的 URL 格式
+        self.proxy_url = f"http://{self.tunnel_username}:{self.tunnel_password}@{self.tunnel}"
 
     def process_request(self, request, spider):
-        proxy = random.choice(self.proxy_list)
-        request.meta['proxy'] = proxy
+        try:
+            # 为请求设置代理
+            request.meta['proxy'] = self.proxy_url
+            logging.info(f"Set proxy {self.proxy_url} for request: {request.url}")
+
+            # 可添加代理可用性检查
+            # test_url = 'http://httpbin.org/ip'
+            # response = requests.get(test_url, proxies={"http": self.proxy_url, "https": self.proxy_url}, timeout=5)
+            # if response.status_code == 200:
+            #     logging.info(f"Proxy {self.proxy_url} is available.")
+            # else:
+            #     logging.warning(f"Proxy {self.proxy_url} returned status code {response.status_code}.")
+        except Exception as e:
+            # 处理异常，记录错误信息
+            logging.error(f"Error setting proxy for request {request.url}: {e}")
+
 # TODO 设置User-Agent
 class UserAgentMiddleware:
-    def __init__(self, user_agent_list):
-        self.user_agent_list = user_agent_list
-
-    @classmethod
-    def from_crawler(cls, crawler):
-        return cls(
-            user_agent_list = crawler.settings.get('USER_AGENT_LIST')
-        )
 
     def process_request(self, request, spider):
-        user_agent = random.choice(self.user_agent_list)
+        user_agent = get_user_agent()
         request.headers['User-Agent'] = user_agent
 
 

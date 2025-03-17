@@ -47,7 +47,7 @@ class AlbumPipeline:
     def process_item(self, item, spider):
         try:
             # 打印提取的数据
-            logging.info(f"Extracted item: {item}")
+            # logging.info(f"Extracted item: {item}")
             # 将文件指针移动到末尾确保追加写入
             self.file.seek(0, os.SEEK_END)
             # 将数据写入 CSV 文件
