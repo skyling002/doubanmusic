@@ -21,9 +21,9 @@ logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(
 class ProxyMiddleware:
     def __init__(self):
         # 初始化隧道代理的用户名、密码和地址
-        self.tunnel_username = 't14186799080081'
-        self.tunnel_password = 'w7xvgxeb'
-        self.tunnel = 'i528.kdltps.com:15818'
+        self.tunnel_username = ''
+        self.tunnel_password = ''
+        self.tunnel = ''
         # 生成代理的 URL 格式
         self.proxy_url = f"http://{self.tunnel_username}:{self.tunnel_password}@{self.tunnel}"
 

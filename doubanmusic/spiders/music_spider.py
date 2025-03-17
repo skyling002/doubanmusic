@@ -47,29 +47,6 @@ class MusicSpiderSpider(scrapy.Spider):
         logging.info(f'一共跳过{self.skip}个专辑')
         logging.info(f'共爬取{self.index}个专辑')
 
-
-    # def process_response(self, request, response, spider):
-    #     if response.status in [301, 302]:
-    #         # 获取原请求的 URL
-    #         original_url = request.url
-    #         # 获取当前重试次数，默认为 0
-    #         retry_times = request.meta.get('retry_times', 0)
-    #
-    #         if retry_times < 5:
-    #             # 重试次数加 1
-    #             new_retry_times = retry_times + 1
-    #             # 创建一个新的请求对象，使用原 URL
-    #             new_request = request.copy()
-    #             new_request.url = original_url
-    #             new_request.meta['retry_times'] = new_retry_times
-    #             self.logger.info(f"Redirect detected. Retrying {original_url} (Attempt {new_retry_times}/5)")
-    #             return new_request
-    #         else:
-    #             # 达到最大重试次数，忽略该请求
-    #             self.logger.warning(f"Max retries reached for {original_url}. Ignoring request.")
-    #             raise IgnoreRequest()
-    #     return response
-
     def parse(self, response):
         """处理分类列表页，提取所有分类URL"""
         list_td = response.xpath('//*[@id="风格"]/div[2]//td')
@@ -79,14 +56,8 @@ class MusicSpiderSpider(scrapy.Spider):
             self.tag_urls.append(tag_url)
 
         for index, tag_url in enumerate(self.tag_urls):
-            # if index == 0:
-            #     self.logger.info(f"跳过第一个分类: {tag_url}")
-            #     continue
             self.logger.info(f"正在爬取分类: {tag_url}")
             yield response.follow(tag_url, self.parse_category)
-        # test_url = self.tag_urls[0]
-        # self.logger.info(f"正在爬取分类: {test_url}")
-        # yield response.follow(test_url, self.parse_category)
 
     def parse_category(self, response):
         """处理单个分类页的分页逻辑"""
@@ -117,22 +88,6 @@ class MusicSpiderSpider(scrapy.Spider):
         logging.info("下一页: %s", next_url)
         yield response.follow(next_url, self.parse_category)
 
-        # if next_page:
-            # try:
-            #     match = re.search(r'start=(\d+)', next_page)
-            #     if match:
-            #         start_value = match.group(1)
-            #         pages = int(start_value) / self.ITEM_PER_PAGE
-            #         if pages <= 50:
-            #             next_url = self.douban_url + next_page
-            #             logging.info("下一页: %s", next_url)
-            #             yield response.follow(next_url, self.parse_category)
-            #     else:
-            #         # 处理不符合预期格式的情况
-            #         self.logger.warning("Next page URL does not match expected format: %s", next_page)
-            # except(ValueError, AttributeError) as e:
-            #     # 捕获并记录异常
-            #     self.logger.error("Error processing next page URL: %s", e)
     def parse_album(self, response):
         item = AlbumItem()
         item['album_url'] = response.url

@@ -84,7 +84,7 @@ COOKIES_ENABLED = False # 不需要模拟登录
 # Enable or disable downloader middlewares
 # See https://docs.scrapy.org/en/latest/topics/downloader-middleware.html
 DOWNLOADER_MIDDLEWARES = {
-    "doubanmusic.middlewares.ProxyMiddleware": 543,
+    # "doubanmusic.middlewares.ProxyMiddleware": 543,
     "doubanmusic.middlewares.UserAgentMiddleware": 544,
    # "doubanmusic.middlewares.DoubanmusicDownloaderMiddleware": 543,
 }
