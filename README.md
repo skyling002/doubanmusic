@@ -1,3 +1,6 @@
+## 项目说明
+"豆瓣音乐专辑爬取"
+
 ## 参数说明
 - `settings.py`: 项目设置文件，由于并发设置极小，所以速度很慢，如需优化，请修改`settings.py`文件中的`CONCURRENT_REQUESTS`参数。
 
